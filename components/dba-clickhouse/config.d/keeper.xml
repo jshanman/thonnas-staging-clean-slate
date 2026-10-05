@@ -1,0 +1,10 @@
+<!-- @intent Point local ClickHouse at colocated Keeper service -->
+<clickhouse>
+  <zookeeper>
+    <node>
+      <host>dba-clickhouse-keeper</host>
+      <port>9181</port>
+    </node>
+  </zookeeper>
+</clickhouse>
+

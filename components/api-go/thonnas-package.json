@@ -1,0 +1,44 @@
+{
+  "name": "@thonnas/api-go",
+  "version": "0.3.0-beta.5",
+  "description": "Go backend API for high-performance, high-concurrency operations and real-time features.",
+  "dependencies": {
+    "@thonnas/infra-docker": "latest"
+  },
+  "dependencies-one-of": {
+    "metrics": {
+      "@thonnas/metrics-otel-signoz": "latest"
+    }
+  },
+  "thonnas": {
+    "package_type": "component",
+    "key": "api-go",
+    "component_type": "api",
+    "classification": "core-thonnas",
+    "framework": "go-standard",
+    "language": "go",
+    "module_path": "internal/modules/",
+    "wiring_file": "internal/app/modules.go",
+    "implements_strategies": [
+      "architecture.contracts.portable",
+      "auth.jwt",
+      "comms.duplex.websocket",
+      "comms.http.rest",
+      "config.env",
+      "observe.logging.structured",
+      "observe.metrics.portable",
+      "observe.metrics.prometheus",
+      "scheduled-job"
+    ],
+    "requires_strategies": [
+      "architecture.contracts.portable",
+      "observe.metrics.otel",
+      "observe.tracing.otel"
+    ],
+    "build": {
+      "command": "bash scripts/build.sh",
+      "runtime": "go"
+    }
+  }
+}
+

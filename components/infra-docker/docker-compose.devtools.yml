@@ -1,0 +1,14 @@
+# Dev tools - includes generated devtools-node (single node_modules shadow for this component).
+# Run npm run e2e-build first (or thonnas build for infra-docker).
+
+include:
+  - path: generated/docker-compose.devtools.generated.yml
+
+volumes:
+  devtools-node-modules:
+  devtools-pnpm-store:
+
+networks:
+  thonnas-network:
+    external: true
+

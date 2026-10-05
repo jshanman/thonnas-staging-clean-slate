@@ -1,0 +1,47 @@
+# Go build artifacts
+bin/
+tmp/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage/
+*.log
+
+# Air temporary files
+.air.toml.bak
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+docs/
+
+# Test files (not needed in container)
+*_test.go
+test/
+
+# Environment files (handled by docker-compose)
+.env
+.env.local
+ENV.local
+
+# Build artifacts
+dist/
+build/

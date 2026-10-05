@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1",
+  "resolutions": [
+    {
+      "strategy": "architecture.contracts.portable",
+      "consumer": "api-go",
+      "purpose": "architecture.contracts.portable",
+      "resolvedTo": "api-go",
+      "candidates": [
+        "api-go",
+        "lib:arch-thonnas"
+      ],
+      "resolvedBy": "ai",
+      "reasoning": "No host AI provider was available; defaulted deterministically to the first candidate (api-go). Review this choice manually.",
+      "decidedAt": "2026-10-05T07:17:42.921Z"
+    }
+  ]
+}

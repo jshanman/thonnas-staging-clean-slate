@@ -1,0 +1,91 @@
+# @intent Own local ClickHouse + Keeper for dba-clickhouse (moved out of metrics)
+services:
+  # @intent Colocated ClickHouse Keeper (not a shared infra.coord.zookeeper ensemble)
+  dba-clickhouse-keeper:
+    image: clickhouse/clickhouse-keeper:25.5.6
+    restart: unless-stopped
+    volumes:
+      - dba_clickhouse_keeper:/var/lib/clickhouse-keeper
+      - ./config.d/keeper_config.xml:/etc/clickhouse-keeper/keeper_config.xml:ro
+    networks:
+      - thonnas-network
+    labels:
+      - "com.thonnas.component=dba-clickhouse"
+      - "com.thonnas.component-type=dba"
+      - "com.thonnas.classification=open-source"
+      - "com.thonnas.version=25.5.6"
+    healthcheck:
+      test: ["CMD-SHELL", "clickhouse-keeper-client -h 127.0.0.1 -p 9181 -q 'stat' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  dba-clickhouse:
+    image: clickhouse/clickhouse-server:25.5.6
+    restart: unless-stopped
+    ports:
+      - "${DBA_CLICKHOUSE_HTTP_HOST_PORT:-8123}:8123"
+      - "${DBA_CLICKHOUSE_NATIVE_HOST_PORT:-19000}:9000"
+    env_file:
+      - ./.env.${THONNAS_ENV:-development}
+    environment:
+      - CLICKHOUSE_SKIP_USER_SETUP=1
+      - CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
+      - THONNAS_ENV=${THONNAS_ENV:-development}
+    volumes:
+      - dba_clickhouse_data:/var/lib/clickhouse
+      - ./config.d/cluster.xml:/etc/clickhouse-server/config.d/cluster.xml:ro
+      - ./config.d/keeper.xml:/etc/clickhouse-server/config.d/keeper.xml:ro
+    networks:
+      thonnas-network:
+        aliases:
+          - dba-clickhouse
+    depends_on:
+      dba-clickhouse-keeper:
+        condition: service_healthy
+    labels:
+      - "com.thonnas.component=dba-clickhouse"
+      - "com.thonnas.component-type=dba"
+      - "com.thonnas.classification=open-source"
+      - "com.thonnas.version=25.5.6"
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q 0.0.0.0:8123/ping || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+  # @intent One-shot: create local `thonnas` user from generated compose secret
+  dba-clickhouse-init:
+    image: clickhouse/clickhouse-server:25.5.6
+    restart: "no"
+    env_file:
+      - ./.env.${THONNAS_ENV:-development}
+    environment:
+      - THONNAS_ENV=${THONNAS_ENV:-development}
+    volumes:
+      - ./scripts/compose-init-thonnas-user.sh:/hooks/compose-init-thonnas-user.sh:ro
+    entrypoint: ["/bin/bash", "/hooks/compose-init-thonnas-user.sh"]
+    network_mode: service:dba-clickhouse
+    depends_on:
+      dba-clickhouse:
+        condition: service_healthy
+    labels:
+      - "com.thonnas.component=dba-clickhouse"
+      - "com.thonnas.component-type=dba"
+
+volumes:
+  dba_clickhouse_data:
+    driver: local
+  dba_clickhouse_keeper:
+    driver: local
+
+networks:
+  thonnas-network:
+    external: true
+

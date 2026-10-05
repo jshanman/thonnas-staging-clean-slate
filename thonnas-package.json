@@ -1,0 +1,11 @@
+{
+  "name": "tmp-staging-clean-slate",
+  "version": "1.0.0",
+  "dependencies": {
+    "@thonnas/architecture-thonnas": "^0.1.0",
+    "@thonnas/pm-thonnas": "^0.1.0"
+  },
+  "thonnas": {
+    "package_type": "project"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "name": "@thonnas/infra-docker",
+  "version": "0.2.0-beta.13",
+  "description": "Docker Compose infra-as-code bundle for managing multi-service environments.",
+  "keywords": [
+    "thonnas",
+    "architecture",
+    "infrastructure",
+    "docker-compose",
+    "orchestration",
+    "core",
+    "docker",
+    "containerization"
+  ],
+  "engines": {
+    "docker": ">=20.0.0",
+    "docker-compose": ">=2.20.0"
+  },
+  "scripts": {
+    "e2e-build": "npx ts-node --transpile-only ./scripts/e2e-build.ts",
+    "devtools:start": "bash scripts/devtools-compose.sh up -d",
+    "devtools:stop": "bash scripts/devtools-compose.sh down"
+  },
+  "thonnas": {
+    "package_type": "component",
+    "key": "infra-docker",
+    "component_type": "infra",
+    "env_scope": [
+      "development",
+      "local",
+      "beta"
+    ],
+    "classification": "core-thonnas",
+    "framework": "docker-compose",
+    "language": "yaml",
+    "implements_strategies": [
+      "infra.container.compose-host",
+      "infra.containers.docker-compose",
+      "infra.containers.docker",
+      "config.container-images",
+      "config.deployment"
+    ],
+    "wiring_file": "generated/docker-compose.generated.yml",
+    "compatible_modules": [],
+    "lock_files": [
+      "package-lock.json"
+    ],
+    "secrets_provider": {
+      "id": "docker-secrets",
+      "module": "scripts/config/dockerSecrets.provider.js",
+      "export": "createSecretsProvider",
+      "priority": 200
+    },
+    "infra_derivation": {
+      "command": "npm run e2e-build && npm run generate:endpoints",
+      "description": "Discovery-driven: generate compose, thonnas-infra.json, reverse-proxy routes; then config exports"
+    },
+    "doctor": {
+      "fixes": {
+        "docker": "Install Docker Desktop: https://docker.com/products/docker-desktop"
+      },
+      "engines": {
+        "nodejs": {
+          "version": ">=18.0.0",
+          "versionCmd": "node --version",
+          "fix": "Install Node.js: https://nodejs.org/ or use nvm: nvm install 20"
+        },
+        "npm": {
+          "version": ">=9.0.0",
+          "versionCmd": "npm --version",
+          "fix": "npm comes with Node.js. Install Node.js: https://nodejs.org/"
+        },
+        "docker-compose": {
+          "version": ">=2.20.0",
+          "versionCmd": "docker compose version",
+          "fix": "Docker Compose V2 is included with Docker Desktop. Update Docker Desktop or see: https://docs.docker.com/compose/install/"
+        }
+      },
+      "services": {
+        "docker-daemon": {
+          "check": "docker info",
+          "fix": "Start Docker Desktop or run: sudo systemctl start docker"
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,82 @@
+{
+  "thonnasInfraVersion": 1,
+  "staging": {
+    "domain": "{env}-{component}.{rootDomain}",
+    "strategies": {
+      "runtime": {
+        "key": "infra.container.managed-host",
+        "ports": [3001],
+        "exposed": true,
+        "extras": {
+          "health.path": "/health",
+          "health.graceSeconds": 180,
+          "release.env": "apply"
+        }
+      }
+    }
+  },
+  "production": {
+    "domain": "{env}-{component}.{rootDomain}",
+    "strategies": {
+      "runtime": {
+        "key": "infra.container.managed-host",
+        "ports": [3001],
+        "exposed": true,
+        "extras": {
+          "health.path": "/health",
+          "health.graceSeconds": 180,
+          "release.env": "apply"
+        }
+      }
+    }
+  },
+  "environments": {
+    "development": {
+      "endpoints": {
+        "external": {
+          "primary": {
+            "host": "localhost",
+            "port": 3001,
+            "protocol": "http"
+          }
+        }
+      }
+    }
+  },
+  "default": {
+    "strategies": {
+      "runtime": {
+        "key": "infra.container.compose-host",
+        "ports": [3001],
+        "exposed": true,
+        "extras": { "services": [] }
+      }
+    },
+    "endpoints": {
+      "internal": {
+        "primary": {
+          "host": "api-go",
+          "port": 3001,
+          "protocol": "http"
+        }
+      },
+      "external": {
+        "primary": {
+          "host": "{env}.api-go.{rootDomain}",
+          "port": 80,
+          "protocol": "http"
+        }
+      }
+    },
+    "derivations": [
+      {
+        "name": "API_GO_EXTERNAL_HOST",
+        "type": "config",
+        "path": "runtime.externalHost",
+        "description": "External hostname for api-go derived from infra endpoints.",
+        "source": "{{endpoints.external.default.host}}"
+      }
+    ]
+  }
+}
+

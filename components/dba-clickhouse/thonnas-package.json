@@ -1,0 +1,22 @@
+{
+  "name": "@thonnas/dba-clickhouse",
+  "version": "0.1.0-beta.5",
+  "description": "ClickHouse DBA store on infra.compute.fleet.dba with colocated Keeper.",
+  "dependencies": {
+    "@thonnas/infra-docker": "latest",
+    "@thonnas/sdk-thonnas": "latest"
+  },
+  "thonnas": {
+    "package_type": "component",
+    "key": "dba-clickhouse",
+    "component_type": "dba",
+    "classification": "open-source",
+    "framework": "clickhouse",
+    "language": "config",
+    "implements_strategies": [
+      "infra.compute.fleet.dba"
+    ],
+    "compatible_modules": []
+  }
+}
+

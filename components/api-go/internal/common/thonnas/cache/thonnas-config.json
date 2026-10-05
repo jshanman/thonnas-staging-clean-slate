@@ -1,0 +1,23 @@
+{
+  "config": {
+    "default": {
+      "enabled": false,
+      "provider": "noop",
+      "host": "localhost",
+      "port": 6379,
+      "maxRetries": 3,
+      "minIdleConns": 2,
+      "poolSize": 10,
+      "poolTimeout": "5s",
+      "dialTimeout": "5s",
+      "readTimeout": "3s",
+      "writeTimeout": "3s",
+      "maxRetryBackoff": "5s",
+      "minRetryBackoff": "8ms",
+      "password": ""
+    }
+  },
+  "imports": [],
+  "exports": []
+}
+

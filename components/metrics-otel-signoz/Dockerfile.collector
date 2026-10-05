@@ -1,0 +1,7 @@
+# @intent Wrap Signoz collector so release image runs package boot (THONNAS_DBA_FLEET_* → DSN)
+FROM signoz/signoz-otel-collector:v0.142.0
+COPY hooks/signoz-collector-boot.sh /thonnas/signoz-collector-boot.sh
+USER root
+RUN chmod 0755 /thonnas/signoz-collector-boot.sh
+ENTRYPOINT ["/bin/sh", "/thonnas/signoz-collector-boot.sh"]
+

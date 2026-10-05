@@ -1,0 +1,19 @@
+<!-- @intent Define single-node Signoz-compatible cluster for local compose migrate -->
+<clickhouse>
+  <remote_servers>
+    <cluster>
+      <shard>
+        <replica>
+          <host>dba-clickhouse</host>
+          <port>9000</port>
+        </replica>
+      </shard>
+    </cluster>
+  </remote_servers>
+  <macros>
+    <shard>01</shard>
+    <replica>01</replica>
+    <cluster>cluster</cluster>
+  </macros>
+</clickhouse>
+

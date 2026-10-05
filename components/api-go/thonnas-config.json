@@ -1,0 +1,131 @@
+{
+  "config": {
+    "default": {
+      "environment": "development",
+      "ginMode": "debug",
+      "logLevel": "info",
+      "logFormat": "json",
+      "port": "3001",
+      "serviceName": "api-go",
+      "metricsEnabled": true,
+      "metricsProvider": "opentelemetry",
+      "corsAllowedOrigins": ["http://localhost:4200"],
+      "corsAllowCredentials": true,
+      "httpReadTimeout": "15s",
+      "httpReadHeaderTimeout": "5s",
+      "httpWriteTimeout": "15s",
+      "httpIdleTimeout": "60s",
+      "httpMaxHeaderBytes": 1048576,
+      "httpShutdownTimeout": "30s",
+      "otelEndpoint": "",
+      "http": {
+        "readTimeout": "15s",
+        "readHeaderTimeout": "5s",
+        "writeTimeout": "15s",
+        "idleTimeout": "60s",
+        "maxHeaderBytes": 1048576,
+        "shutdownTimeout": "30s"
+      },
+      "websocket": {
+        "endpoint": "/ws",
+        "readBufferSize": 1024,
+        "writeBufferSize": 1024,
+        "pingInterval": "30s",
+        "pongTimeout": "10s",
+        "maxMessageSize": 8192,
+        "writeDeadline": "10s",
+        "maxConnections": 10000,
+        "maxConnectionsPerUser": 5,
+        "compressionEnabled": true
+      },
+      "security": {
+        "rateLimitEnabled": true,
+        "maxRequestsPerSecond": 1000
+      },
+      "cors": {
+        "allowCredentials": true
+      },
+      "otel": {
+        "serviceName": "api-go"
+      },
+      "metrics": {
+        "provider": "opentelemetry",
+        "port": 9090
+      }
+    }
+  },
+  "imports": [
+    {
+      "name": "METRICS_OTEL_GRPC_ENDPOINT",
+      "cloneTo": "OTEL_EXPORTER_OTLP_ENDPOINT",
+      "provider": { "keyPattern": "metrics-otel.*" },
+      "path": "otelEndpoint",
+      "description": "OTLP gRPC collector endpoint for emitting traces/metrics."
+    },
+    {
+      "name": "WORKER_MANAGER_TEMPORAL_ENDPOINT",
+      "provider": { "keyPattern": "worker-manager-temporal.*" },
+      "path": "runtime.endpoint",
+      "description": "Internal Temporal service endpoint (host:port) for scheduling the UserCountJob cron."
+    },
+    {
+      "name": "WORKER_MANAGER_TEMPORAL_NAMESPACE",
+      "provider": { "keyPattern": "worker-manager-temporal.*" },
+      "path": "runtime.namespace",
+      "description": "Temporal namespace to connect to."
+    },
+    {
+      "name": "WORKER_MANAGER_TEMPORAL_TASK_QUEUE",
+      "provider": { "keyPattern": "worker-manager-temporal.*" },
+      "path": "runtime.taskQueue",
+      "description": "Temporal task queue api-go's worker polls."
+    }
+  ],
+  "exports": [
+    {
+      "name": "API_GO_INTERNAL_HOST",
+      "description": "Internal HTTP host for api-go.",
+      "default": "api-go",
+      "selfImportPath": "runtime.host",
+      "provider": "infra"
+    },
+    {
+      "name": "API_GO_INTERNAL_PORT",
+      "description": "HTTP listen port for api-go.",
+      "provider": "infra",
+
+      "default": "3001",
+      "selfImportPath": "app.port"
+    },
+    {
+      "name": "API_GO_INTERNAL_URL",
+      "description": "Internal URL for api-go service-to-service calls.",
+      "default": "http://api-go:3001",
+      "selfImportPath": "runtime.internalUrl"
+    }
+  ],
+  "internal": [
+    {
+      "name": "GIN_MODE",
+      "description": "Gin framework mode (expected by Gin library).",
+      "path": "app.ginMode"
+    },
+    {
+      "name": "GO_ENV",
+      "description": "Go environment name (development/staging/production/test).",
+      "path": "app.environment"
+    },
+    {
+      "name": "LOG_LEVEL",
+      "description": "Log verbosity level.",
+      "path": "app.logLevel"
+    },
+    {
+      "name": "LOG_FORMAT",
+      "description": "Log format (json/text).",
+      "path": "app.logFormat"
+    }
+  ]
+}
+
+

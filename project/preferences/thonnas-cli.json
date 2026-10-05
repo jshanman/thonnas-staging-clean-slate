@@ -1,0 +1,12 @@
+{
+  "lifecycle_stage": "dev",
+  "data_migration_strategy": "manual-review",
+  "breaking_changes_policy": "review",
+  "prompter_type": "tech",
+  "default_selections": {},
+  "mode": "project",
+  "componentsDir": "./components",
+  "registry_url": "http://beta.marketplace.thonnas-mvp.parfiamlabs.com",
+  "auto_update_check": true,
+  "telemetry_enabled": false
+}

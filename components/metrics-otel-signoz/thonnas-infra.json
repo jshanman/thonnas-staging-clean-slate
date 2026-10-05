@@ -1,0 +1,105 @@
+{
+  "thonnasInfraVersion": 1,
+  "staging": {
+    "domain": "{env}-{component}.{rootDomain}",
+    "strategies": {
+      "collector": {
+        "key": "infra.observe.metrics",
+        "ports": [4317, 4318],
+        "extras": {
+          "peers": ["infra.compute.fleet.dba"],
+          "protocols": ["grpc", "http"]
+        }
+      }
+    }
+  },
+  "production": {
+    "domain": "{env}-{component}.{rootDomain}",
+    "strategies": {
+      "collector": {
+        "key": "infra.observe.metrics",
+        "ports": [4317, 4318],
+        "extras": {
+          "peers": ["infra.compute.fleet.dba"],
+          "protocols": ["grpc", "http"]
+        }
+      }
+    }
+  },
+  "default": {
+    "domain": "{env}.{component}.{rootDomain}",
+    "strategies": {
+      "collector": {
+        "key": "infra.container.compose-host",
+        "ports": [4317, 4318],
+        "extras": { "services": [], "protocols": ["grpc", "http"] }
+      }
+    },
+    "endpoints": {
+      "internal": {
+        "default": {
+          "host": "metrics-otel-signoz-collector",
+          "serviceName": "otel-collector",
+          "port": 4317,
+          "protocol": "grpc",
+          "tags": ["collector", "grpc"]
+        },
+        "http": {
+          "host": "metrics-otel-signoz-collector",
+          "serviceName": "otel-collector",
+          "port": 4318,
+          "protocol": "http",
+          "tags": ["collector", "http"]
+        }
+      },
+      "external": {}
+    },
+    "derivations": [
+      {
+        "name": "METRICS_SIGNOZ_ENDPOINTS",
+        "type": "config",
+        "path": "infra.endpoints.metrics-otel-signoz",
+        "templateType": "json",
+        "sourcePath": "endpoints"
+      },
+      {
+        "name": "METRICS_OTEL_SIGNOZ_INTERNAL_HOST",
+        "description": "Internal collector host for in-cluster exporters, derived from the docker-compose network alias (see metrics-otel-signoz/docker-compose.yml otel-collector service).",
+        "type": "config",
+        "path": "connection.internal.host",
+        "source": "{{endpoints.internal.default.host}}"
+      },
+      {
+        "name": "METRICS_OTEL_SIGNOZ_INTERNAL_GRPC_PORT",
+        "description": "Internal collector port (gRPC) for in-cluster exporters.",
+        "type": "config",
+        "path": "connection.internal.grpcPort",
+        "source": "{{endpoints.internal.default.port}}"
+      },
+      {
+        "name": "METRICS_OTEL_SIGNOZ_INTERNAL_HTTP_PORT",
+        "description": "Internal collector port (HTTP) for in-cluster exporters.",
+        "type": "config",
+        "path": "connection.internal.httpPort",
+        "source": "{{endpoints.internal.http.port}}"
+      },
+      {
+        "name": "METRICS_OTEL_SIGNOZ_GRPC_ENDPOINT",
+        "description": "SigNoz OTLP gRPC collector endpoint (host:port).",
+        "type": "config",
+        "path": "runtime.otel.grpcEndpoint",
+        "source": "{{endpoints.internal.default.host}}:{{endpoints.internal.default.port}}"
+      },
+      {
+        "name": "METRICS_OTEL_GRPC_ENDPOINT",
+        "description": "SigNoz OTLP gRPC collector endpoint (host:port), alias export consumed by generic otel-metrics modules.",
+        "type": "config",
+        "path": "runtime.otel.grpcEndpointAlias",
+        "source": "{{endpoints.internal.default.host}}:{{endpoints.internal.default.port}}"
+      }
+    ]
+  }
+}
+
+
+

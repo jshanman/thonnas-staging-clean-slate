@@ -1,0 +1,42 @@
+{
+  "name": "@thonnas/infra-docker",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "Docker Compose orchestration component with convenience scripts for managing multi-service container deployments",
+  "scripts": {
+    "test": "node --import tsx --test test/reverse-proxy.test.ts test/e2e-build.test.ts test/graph-compose.test.ts",
+    "preup": "docker network create thonnas-network 2>/dev/null || true",
+    "up": "npm run preup && docker compose up -d",
+    "up:build": "npm run preup && docker compose up -d --build",
+    "build": "npm run e2e-build && npm run generate:endpoints && npm run preup && docker compose build",
+    "down": "docker compose down",
+    "logs": "docker compose logs -f",
+    "ps": "docker compose ps",
+    "restart": "npm run down && npm run up",
+    "config": "docker compose config",
+    "generate:endpoints": "npm install && tsx scripts/generate-endpoints.ts",
+    "e2e-build": "npm install && tsx scripts/e2e-build.ts",
+    "devtools:start": "docker compose -f docker-compose.devtools.yml up -d --build",
+    "devtools:stop": "docker compose -f docker-compose.devtools.yml down",
+    "devtools:logs": "docker compose -f docker-compose.devtools.yml logs -f",
+    "devtools:ps": "docker compose -f docker-compose.devtools.yml ps",
+    "devtools:restart": "npm run devtools:stop && npm run devtools:start"
+  },
+  "keywords": [
+    "thonnas",
+    "docker-compose",
+    "orchestration",
+    "containers"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
+  }
+}
+

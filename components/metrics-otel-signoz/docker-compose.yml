@@ -1,0 +1,113 @@
+# @intent Provide SigNoz collector (+ local UI) that peers dba-clickhouse for storage
+# ClickHouse server / Keeper / ZooKeeper ownership lives in @thonnas/dba-clickhouse.
+# Start dba-clickhouse on thonnas-network before (or with) this stack.
+x-common: &common
+  networks:
+    - thonnas-network
+  restart: unless-stopped
+  logging:
+    options:
+      max-size: 50m
+      max-file: "3"
+
+# @intent Depend on peer store when present in the same compose project
+x-dba-depend: &dba-depend
+  !!merge <<: *common
+  depends_on:
+    dba-clickhouse:
+      condition: service_started
+      required: false
+    dba-clickhouse-init:
+      condition: service_completed_successfully
+      required: false
+
+services:
+  # @intent Expose SigNoz UI for local DX (production dashboard key lives in dashboard-signoz)
+  signoz:
+    !!merge <<: *dba-depend
+    image: signoz/signoz:${VERSION:-v0.98.0}
+    entrypoint: ["/bin/sh", "/hooks/signoz-local-ui-boot.sh"]
+    env_file:
+      - ./.env.${THONNAS_ENV:-development}
+    ports:
+      - "${METRICS_OTEL_SIGNOZ_HOST_PORT:-18080}:8080"
+    volumes:
+      - ./hooks/signoz-local-ui-boot.sh:/hooks/signoz-local-ui-boot.sh:ro
+      - ./resources/common/signoz/prometheus.yml:/root/config/prometheus.yml
+      - ./resources/common/dashboards:/root/config/dashboards
+      - metrics-otel-signoz-sqlite:/var/lib/signoz/
+    environment:
+      - SIGNOZ_ALERTMANAGER_PROVIDER=signoz
+      - THONNAS_DBA_FLEET_HOST=${THONNAS_DBA_FLEET_HOST:-dba-clickhouse}
+      - THONNAS_DBA_FLEET_PORT=${THONNAS_DBA_FLEET_PORT:-9000}
+      - THONNAS_DBA_FLEET_USER=${THONNAS_DBA_FLEET_USER:-thonnas}
+      - THONNAS_ENV=${THONNAS_ENV:-development}
+      - SIGNOZ_SQLSTORE_SQLITE_PATH=/var/lib/signoz/signoz.db
+      - DASHBOARDS_PATH=/root/config/dashboards
+      - STORAGE=clickhouse
+      - GODEBUG=netdns=go
+      - TELEMETRY_ENABLED=true
+      - DEPLOYMENT_TYPE=docker-standalone-amd
+      - DOT_METRICS_ENABLED=true
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - --spider
+        - -q
+        - localhost:8080/api/v1/health
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    labels:
+      com.thonnas.component: "metrics-otel-signoz"
+      com.thonnas.component-type: "metrics"
+      com.thonnas.classification: "core-thonnas"
+      com.thonnas.version: "1.0.0"
+
+  # @intent Receive OTLP data; boot hook maps fleet env → Signoz ClickHouse DSNs + migrate
+  otel-collector:
+    !!merge <<: *dba-depend
+    image: signoz/signoz-otel-collector:${OTELCOL_TAG:-v0.142.0}
+    entrypoint: ["/bin/sh", "/hooks/signoz-collector-boot.sh"]
+    env_file:
+      - ./.env.${THONNAS_ENV:-development}
+    volumes:
+      - ./hooks/signoz-collector-boot.sh:/hooks/signoz-collector-boot.sh:ro
+      - ./resources/otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro
+    environment:
+      - OTEL_RESOURCE_ATTRIBUTES=host.name=signoz-host,os.type=linux
+      - LOW_CARDINAL_EXCEPTION_GROUPING=false
+      - THONNAS_DBA_FLEET_HOST=${THONNAS_DBA_FLEET_HOST:-dba-clickhouse}
+      - THONNAS_DBA_FLEET_PORT=${THONNAS_DBA_FLEET_PORT:-9000}
+      - THONNAS_DBA_FLEET_USER=${THONNAS_DBA_FLEET_USER:-thonnas}
+      - THONNAS_ENV=${THONNAS_ENV:-development}
+    ports:
+      - "${METRICS_OTEL_SIGNOZ_OTEL_GRPC_HOST_PORT:-4317}:4317"
+      - "${METRICS_OTEL_SIGNOZ_OTEL_HTTP_HOST_PORT:-4318}:4318"
+    depends_on:
+      signoz:
+        condition: service_healthy
+        required: false
+      dba-clickhouse:
+        condition: service_started
+        required: false
+    # @intent Provide stable DNS alias so other components can reach collector without host routing
+    networks:
+      thonnas-network:
+        aliases:
+          - metrics-otel-signoz-collector
+    labels:
+      com.thonnas.component: "metrics-otel-signoz"
+      com.thonnas.component-type: "metrics"
+      com.thonnas.classification: "core-thonnas"
+      com.thonnas.version: "1.0.0"
+
+volumes:
+  metrics-otel-signoz-sqlite:
+
+networks:
+  # External shared network — join the same network as @thonnas/dba-clickhouse
+  thonnas-network:
+    external: true
+

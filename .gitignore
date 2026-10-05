@@ -1,0 +1,25 @@
+# Thonnas CLI
+.thonnas/packages/
+.thonnas/workspace/
+.thonnas/cache/
+.thonnas/libs/
+.thonnas/tmp/
+.thonnas/.thonnasrc
+**/.thonnas/.lock
+**/.thonnas/transactions/
+**/.thonnas/backups/
+.thonnas/cli-workspaces/
+.agents/*
+.thonnas/ai-provider-secrets.json
+.thonnas/ai-ready.json
+.thonnas/installed-packages.json
+.env.thonnas
+**/.env.development
+**/.env.dev
+**/.env.beta
+**/.env.staging
+**/.env.production
+!**/.env.example
+!**/.env.template
+.thonnas/transactions/
+.thonnas/backups/

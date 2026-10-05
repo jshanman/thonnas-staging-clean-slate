@@ -1,0 +1,107 @@
+{
+  "thonnasInfraVersion": 1,
+  "staging": {
+    "strategies": {
+      "store": {
+        "key": "infra.compute.fleet.dba",
+        "extras": {
+          "bootstrapScript": "bootstrap-clickhouse.sh",
+          "bootstrapUrl": "",
+          "servicePorts": [
+            8123,
+            9000
+          ],
+          "volumePath": "/var/lib/clickhouse",
+          "capacity": "xs",
+          "reliability": "dev"
+        }
+      }
+    }
+  },
+  "production": {
+    "strategies": {
+      "store": {
+        "key": "infra.compute.fleet.dba",
+        "extras": {
+          "bootstrapScript": "bootstrap-clickhouse.sh",
+          "bootstrapUrl": "",
+          "servicePorts": [
+            8123,
+            9000
+          ],
+          "volumePath": "/var/lib/clickhouse"
+        }
+      }
+    }
+  },
+  "default": {
+    "domain": "{env}.{component}.{rootDomain}",
+    "endpoints": {
+      "internal": {
+        "native": {
+          "host": "dba-clickhouse",
+          "port": 9000,
+          "protocol": "clickhouse",
+          "tags": [
+            "native"
+          ]
+        },
+        "http": {
+          "host": "dba-clickhouse",
+          "port": 8123,
+          "protocol": "http",
+          "tags": [
+            "http"
+          ]
+        }
+      },
+      "external": {}
+    },
+    "derivations": [
+      {
+        "name": "DBA_CLICKHOUSE_ENDPOINTS",
+        "type": "config",
+        "path": "infra.endpoints.dba-clickhouse",
+        "templateType": "json",
+        "sourcePath": "endpoints"
+      },
+      {
+        "name": "DBA_CLICKHOUSE_NATIVE_HOST",
+        "type": "config",
+        "path": "connection.internal.native.host",
+        "source": "{{endpoints.internal.native.host}}"
+      },
+      {
+        "name": "DBA_CLICKHOUSE_NATIVE_PORT",
+        "type": "config",
+        "path": "connection.internal.native.port",
+        "source": "{{endpoints.internal.native.port}}"
+      },
+      {
+        "name": "DBA_CLICKHOUSE_HTTP_HOST",
+        "type": "config",
+        "path": "connection.internal.http.host",
+        "source": "{{endpoints.internal.http.host}}"
+      },
+      {
+        "name": "DBA_CLICKHOUSE_HTTP_PORT",
+        "type": "config",
+        "path": "connection.internal.http.port",
+        "source": "{{endpoints.internal.http.port}}"
+      },
+      {
+        "name": "DBA_CLICKHOUSE_NATIVE_URL",
+        "type": "config",
+        "path": "connection.internal.native.url",
+        "source": "clickhouse://thonnas@{{endpoints.internal.native.host}}:{{endpoints.internal.native.port}}/default"
+      },
+      {
+        "name": "DBA_CLICKHOUSE_HTTP_URL",
+        "type": "config",
+        "path": "connection.internal.http.url",
+        "source": "http://{{endpoints.internal.http.host}}:{{endpoints.internal.http.port}}"
+      }
+    ]
+  }
+}
+

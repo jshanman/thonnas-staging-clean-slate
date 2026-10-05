@@ -1,0 +1,19 @@
+{
+  "thonnasInfraVersion": 1,
+  "default": {
+    "domain": "{env}.compose.{rootDomain}",
+    "strategies": {
+      "composeHost": {
+        "key": "infra.container.compose-host",
+        "extras": {
+          "composeFile": "components/infra-docker/docker-compose.yml",
+          "workingDirectory": "/opt/thonnas-app",
+          "monorepoDeploy": true
+        },
+        "networkingScope": "env",
+        "wiringScope": "env",
+        "composeHostScope": "git-tag"
+      }
+    }
+  }
+}

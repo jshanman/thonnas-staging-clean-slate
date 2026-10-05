@@ -1,0 +1,69 @@
+{
+  "imports": [
+    {
+      "name": "THONNAS_DBA_FLEET_HOST",
+      "provider": {
+        "type": "dba",
+        "key": "dba-clickhouse"
+      },
+      "path": "connection.fleet.host",
+      "required": true
+    },
+    {
+      "name": "THONNAS_DBA_FLEET_PORT",
+      "provider": {
+        "type": "dba",
+        "key": "dba-clickhouse"
+      },
+      "path": "connection.fleet.port",
+      "required": true
+    },
+    {
+      "name": "THONNAS_DBA_FLEET_USER",
+      "provider": {
+        "type": "dba",
+        "key": "dba-clickhouse"
+      },
+      "path": "connection.fleet.user",
+      "required": true
+    }
+  ],
+  "exports": [
+    {
+      "name": "METRICS_OTEL_SIGNOZ_INTERNAL_HOST",
+      "description": "Internal collector host for in-cluster exporters.",
+      "default": "metrics-otel-signoz-collector",
+      "selfImportPath": "connection.internal.host",
+      "provider": "infra"
+    },
+    {
+      "name": "METRICS_OTEL_SIGNOZ_INTERNAL_GRPC_PORT",
+      "description": "Internal collector port (gRPC) for in-cluster exporters.",
+      "default": 4317,
+      "selfImportPath": "connection.internal.grpcPort",
+      "provider": "infra"
+    },
+    {
+      "name": "METRICS_OTEL_SIGNOZ_INTERNAL_HTTP_PORT",
+      "description": "Internal collector port (HTTP) for in-cluster exporters.",
+      "default": 4318,
+      "selfImportPath": "connection.internal.httpPort",
+      "provider": "infra"
+    },
+    {
+      "name": "METRICS_OTEL_SIGNOZ_GRPC_ENDPOINT",
+      "description": "SigNoz OTLP gRPC collector endpoint.",
+      "default": "metrics-otel-signoz-collector:4317",
+      "selfImportPath": "runtime.otel.grpcEndpoint",
+      "provider": "infra"
+    },
+    {
+      "name": "METRICS_OTEL_GRPC_ENDPOINT",
+      "description": "SigNoz OTLP gRPC collector endpoint.",
+      "default": "metrics-otel-signoz-collector:4317",
+      "selfImportPath": "runtime.otel.grpcEndpoint",
+      "provider": "infra"
+    }
+  ]
+}
+

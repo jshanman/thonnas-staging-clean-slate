@@ -1,0 +1,6 @@
+# Thonnas Baseline - Docker Compose (discovery-driven)
+# Project name and services come from generated/docker-compose.generated.yml (name from root thonnas-package.json). Run npm run e2e-build first.
+
+include:
+  - path: generated/docker-compose.generated.yml
+

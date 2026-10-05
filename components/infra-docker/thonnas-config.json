@@ -1,0 +1,14 @@
+{
+  "name": "infra-docker",
+  "description": "Docker Compose orchestration; imports infra-cdk exports for LocalStack/S3 when generating Verdaccio config.",
+  "imports": [],
+  "exports": [],
+  "internal": [
+    {
+      "name": "INFRA_DOCKER_PROXY_MAX_BODY_SIZE",
+      "description": "nginx client_max_body_size for infra-docker-reverse-proxy (large npm/Thonnas publish JSON). Use nginx size suffix k/m/g (e.g. 500m = 500 megabytes; not \"mb\").",
+      "default": "500m"
+    }
+  ]
+}
+

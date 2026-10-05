@@ -1,0 +1,27 @@
+{
+  "name": "@thonnas/metrics-otel-signoz",
+  "version": "0.3.0-beta.8",
+  "description": "SigNoz OTEL collector for observability; peers dba-clickhouse telemetry store.",
+  "dependencies": {
+    "@thonnas/dba-clickhouse": "latest",
+    "@thonnas/sdk-thonnas": "latest",
+    "@thonnas/infra-docker": "latest"
+  },
+  "thonnas": {
+    "package_type": "component",
+    "key": "metrics-otel-signoz",
+    "component_type": "metrics",
+    "classification": "core-thonnas",
+    "framework": "signoz",
+    "language": "config",
+    "implements_strategies": [
+      "observe.metrics.portable",
+      "observe.metrics.otel",
+      "observe.tracing.otel",
+      "observe.errors",
+      "observe.apm.signoz"
+    ],
+    "compatible_modules": []
+  }
+}
+

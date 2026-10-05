@@ -1,0 +1,56 @@
+services:
+  api-go:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # @intent Drive build stage directly from THONNAS_ENV (development default, beta/release/prod reuse runtime)
+      target: ${THONNAS_ENV:-development}
+    restart: unless-stopped
+    ports:
+      - "${API_GO_APP_PORT:-3001}:3001"
+      - "${API_GO_METRICS_PORT:-9090}:9090"  # Metrics port
+    # @intent Mirror container GO_ENV with shared THONNAS_ENV selection
+    environment:
+      GO_ENV: ${THONNAS_ENV:-development}
+    # @intent Allow env file swapping via THONNAS_ENV for compose-host strategy
+    env_file:
+      - ./.env.${THONNAS_ENV:-development}
+    volumes:
+      # Mount source code for hot reloading
+      - ./cmd:/app/cmd
+      - ./internal:/app/internal
+      - ./scripts:/app/scripts
+      - ./config:/app/config
+      - ./go.mod:/app/go.mod
+      - ./go.sum:/app/go.sum
+      - ./.air.toml:/app/.air.toml:ro
+      # Exclude build artifacts (vendor directory stays in container)
+      - /app/tmp
+      - /app/.git
+    networks:
+      - thonnas-network
+    labels:
+      - "com.thonnas.component=api-go"
+      - "com.thonnas.component-type=api"
+      - "com.thonnas.classification=core-thonnas"
+      - "com.thonnas.version=1.0.0"
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'        # Max 1 CPU core
+          memory: 1G         # Max 1GB RAM (increased for Go compilation)
+        reservations:
+          cpus: '0.25'       # Minimum 0.25 CPU
+          memory: 256M       # Minimum 256MB RAM
+    healthcheck:
+      # @intent Match common/thonnas/health route GET /health (root returns 404)
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+networks:
+  thonnas-network:
+    external: true
+
+

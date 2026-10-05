@@ -1,0 +1,9 @@
+# Development override - discovered docker-compose.override.yml from components. Run npm run e2e-build first.
+
+include:
+  - path: generated/docker-compose.override.generated.yml
+
+networks:
+  thonnas-network:
+    external: true
+

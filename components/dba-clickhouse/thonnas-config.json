@@ -1,0 +1,45 @@
+{
+  "imports": [],
+  "exports": [
+    {
+      "name": "DBA_CLICKHOUSE_NATIVE_HOST",
+      "description": "Internal ClickHouse native hostname.",
+      "default": "dba-clickhouse",
+      "selfImportPath": "connection.internal.native.host",
+      "provider": "infra"
+    },
+    {
+      "name": "DBA_CLICKHOUSE_NATIVE_PORT",
+      "description": "Internal ClickHouse native port.",
+      "default": 9000,
+      "selfImportPath": "connection.internal.native.port",
+      "provider": "infra"
+    },
+    {
+      "name": "DBA_CLICKHOUSE_HTTP_PORT",
+      "description": "Internal ClickHouse HTTP port.",
+      "default": 8123,
+      "selfImportPath": "connection.internal.http.port",
+      "provider": "infra"
+    },
+    {
+      "name": "THONNAS_DBA_FLEET_HOST",
+      "description": "Portable fleet hostname for peers (local compose alias).",
+      "default": "dba-clickhouse",
+      "selfImportPath": "connection.fleet.host"
+    },
+    {
+      "name": "THONNAS_DBA_FLEET_PORT",
+      "description": "Portable fleet native port for peers.",
+      "default": 9000,
+      "selfImportPath": "connection.fleet.port"
+    },
+    {
+      "name": "THONNAS_DBA_FLEET_USER",
+      "description": "Portable fleet ClickHouse username for peers.",
+      "default": "thonnas",
+      "selfImportPath": "connection.fleet.user"
+    }
+  ]
+}
+
