@@ -1,0 +1,465 @@
+{
+ "Resources": {
+  "Vpc8378EB38": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.42.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "staging-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/Resource"
+   }
+  },
+  "VpcstagingpublicSubnet1Subnet0D7796D4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.42.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "staging-public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/Subnet"
+   }
+  },
+  "VpcstagingpublicSubnet1RouteTableD0ABF646": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/RouteTable"
+   }
+  },
+  "VpcstagingpublicSubnet1RouteTableAssociationA85F5D7D": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcstagingpublicSubnet1RouteTableD0ABF646"
+    },
+    "SubnetId": {
+     "Ref": "VpcstagingpublicSubnet1Subnet0D7796D4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/RouteTableAssociation"
+   }
+  },
+  "VpcstagingpublicSubnet1DefaultRoute4F2B8EB3": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcstagingpublicSubnet1RouteTableD0ABF646"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/DefaultRoute"
+   }
+  },
+  "VpcstagingpublicSubnet1EIPDD487DA5": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/EIP"
+   }
+  },
+  "VpcstagingpublicSubnet1NATGatewayAAE1CEF1": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VpcstagingpublicSubnet1EIPDD487DA5",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "VpcstagingpublicSubnet1Subnet0D7796D4"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "VpcstagingpublicSubnet1DefaultRoute4F2B8EB3",
+    "VpcstagingpublicSubnet1RouteTableAssociationA85F5D7D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/NATGateway"
+   }
+  },
+  "VpcstagingpublicSubnet2Subnet7DCB36B0": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.42.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "staging-public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2/Subnet"
+   }
+  },
+  "VpcstagingpublicSubnet2RouteTable293F0F34": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2/RouteTable"
+   }
+  },
+  "VpcstagingpublicSubnet2RouteTableAssociation13D65CA4": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcstagingpublicSubnet2RouteTable293F0F34"
+    },
+    "SubnetId": {
+     "Ref": "VpcstagingpublicSubnet2Subnet7DCB36B0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2/RouteTableAssociation"
+   }
+  },
+  "VpcstagingpublicSubnet2DefaultRoute2E110883": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "RouteTableId": {
+     "Ref": "VpcstagingpublicSubnet2RouteTable293F0F34"
+    }
+   },
+   "DependsOn": [
+    "VpcVPCGWBF912B6E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2/DefaultRoute"
+   }
+  },
+  "VpcstagingprivateSubnet1SubnetA2681AF3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.42.2.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "staging-private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1/Subnet"
+   }
+  },
+  "VpcstagingprivateSubnet1RouteTable43A7CAB6": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1/RouteTable"
+   }
+  },
+  "VpcstagingprivateSubnet1RouteTableAssociationF29EAC40": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcstagingprivateSubnet1RouteTable43A7CAB6"
+    },
+    "SubnetId": {
+     "Ref": "VpcstagingprivateSubnet1SubnetA2681AF3"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1/RouteTableAssociation"
+   }
+  },
+  "VpcstagingprivateSubnet1DefaultRouteE0F16E21": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcstagingpublicSubnet1NATGatewayAAE1CEF1"
+    },
+    "RouteTableId": {
+     "Ref": "VpcstagingprivateSubnet1RouteTable43A7CAB6"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1/DefaultRoute"
+   }
+  },
+  "VpcstagingprivateSubnet2Subnet23738817": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.42.3.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "staging-private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2/Subnet"
+   }
+  },
+  "VpcstagingprivateSubnet2RouteTable7C7437CF": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2/RouteTable"
+   }
+  },
+  "VpcstagingprivateSubnet2RouteTableAssociation2019E728": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VpcstagingprivateSubnet2RouteTable7C7437CF"
+    },
+    "SubnetId": {
+     "Ref": "VpcstagingprivateSubnet2Subnet23738817"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2/RouteTableAssociation"
+   }
+  },
+  "VpcstagingprivateSubnet2DefaultRoute57009CD8": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VpcstagingpublicSubnet1NATGatewayAAE1CEF1"
+    },
+    "RouteTableId": {
+     "Ref": "VpcstagingprivateSubnet2RouteTable7C7437CF"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2/DefaultRoute"
+   }
+  },
+  "VpcIGWD7BA715C": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "staging-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/IGW"
+   }
+  },
+  "VpcVPCGWBF912B6E": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "VpcIGWD7BA715C"
+    },
+    "VpcId": {
+     "Ref": "Vpc8378EB38"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/Vpc/VPCGW"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0WOzQqDMBCEn8V7TCVQSo8ipfRSRIvXsolbGn+SYjZKEd+9iMWcZuZjGEZwcRI8iWBysarbuNOSzyWBahlM7olK8Ln6KJa9TJVnLPey06r00iCtLLjCesIHyA4DDyx1zioNpK3Zy6u53PJV7kBXIJzgy/JBj0AYhm+GcDC4F7Yn/5QSgXr3aGhhBTrrB4ULM7ZG3rjDKI78zJOocVrHgzeke+TFpj8DEtmV+QAAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "TmpStagingCleanSlateStagingNetworking/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "ExportsOutputRefVpc8378EB38272D6E3A": {
+   "Value": {
+    "Ref": "Vpc8378EB38"
+   },
+   "Export": {
+    "Name": "TmpStagingCleanSlateStagingNetworking:ExportsOutputRefVpc8378EB38272D6E3A"
+   }
+  },
+  "ExportsOutputRefVpcstagingpublicSubnet1Subnet0D7796D4E5DB236A": {
+   "Value": {
+    "Ref": "VpcstagingpublicSubnet1Subnet0D7796D4"
+   },
+   "Export": {
+    "Name": "TmpStagingCleanSlateStagingNetworking:ExportsOutputRefVpcstagingpublicSubnet1Subnet0D7796D4E5DB236A"
+   }
+  },
+  "PublishOutputRefVpc8378EB385002A76F": {
+   "Value": {
+    "Ref": "Vpc8378EB38"
+   }
+  },
+  "PublishOutputRefVpcstagingpublicSubnet1Subnet0D7796D42FA4110A": {
+   "Value": {
+    "Ref": "VpcstagingpublicSubnet1Subnet0D7796D4"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

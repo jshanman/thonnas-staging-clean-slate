@@ -1,0 +1,21 @@
+{
+  "version": "54.0.0",
+  "files": {
+    "29eaa331952ffd2199b2ecbd3688c4818e92a030e11eae753f3959745677bbb1": {
+      "displayName": "TmpStagingCleanSlateStagingComposeHost Template",
+      "source": {
+        "path": "TmpStagingCleanSlateStagingComposeHost.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "785629662432-us-east-1-9410d8d6": {
+          "bucketName": "cdk-hnb659fds-assets-785629662432-us-east-1",
+          "objectKey": "29eaa331952ffd2199b2ecbd3688c4818e92a030e11eae753f3959745677bbb1.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::785629662432:role/cdk-hnb659fds-file-publishing-role-785629662432-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

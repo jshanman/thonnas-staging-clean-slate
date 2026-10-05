@@ -1,0 +1,52 @@
+{
+  "/TmpStagingCleanSlateStagingWiring": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:134:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingWiring/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingWiring/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingWiring/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:764:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)"
+      ]
+    }
+  ]
+}

@@ -97,7 +97,7 @@
         {
             "name": "THONNAS_COMPOSE_GIT_PASSWORD_SECRET_NAME",
             "sourceType": "user-provided",
-            "default": "THONNAS_GIT_PWD",
+            "default": "GIT_CLONE_PASSWORD",
             "description": "AWS Secrets Manager secret name for git clone password. Injected into user-data at deploy time."
         },
         {

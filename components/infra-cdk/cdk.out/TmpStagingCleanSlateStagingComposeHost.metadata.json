@@ -1,0 +1,241 @@
+{
+  "/TmpStagingCleanSlateStagingComposeHost": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:warning",
+      "data": "Feature flag \"@aws-cdk/core:defaultCrossStackReferences\" currently set to \"both\". This is a transitory state. After you have finished deploying this application everywhere, set it to \"weak\". (See: https://github.com/aws/aws-cdk/blob/main/packages/aws-cdk-lib/README.md#reference-strength) [ack: @aws-cdk/core:crossStackReferencesBothTransitional]",
+      "trace": [
+        "Annotations.addMessage (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:3506)",
+        "Annotations.addWarningV2 (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\core\\lib\\annotations.js:1:2194)",
+        "resolveValue (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\core\\lib\\private\\refs.js:1:7752)",
+        "resolveReferencesInElements (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\core\\lib\\private\\refs.js:1:5045)",
+        "resolveReferences (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\core\\lib\\private\\refs.js:1:4718)",
+        "prepareApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\core\\lib\\private\\prepare-app.js:1:1240)",
+        "synthesize (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\core\\lib\\private\\synthesis.js:1:2625)",
+        "App.synth (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\core\\lib\\stage.js:1:5061)",
+        "App.synth (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\core\\lib\\app.js:1:5126)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:764:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500:3",
+        "process.processTicksAndRejections (node:internal/process/task_queues:104:5)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/SsmParameterValue:--aws--service--ami-amazon-linux-latest--al2023-ami-kernel-6.1-x86_64:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Instance2 in aws-cdk-lib...",
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:355:26)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeEip": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeEip"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:391:21)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeEipAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeEipAssociation"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:392:9)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeSecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeSecurityGroupE5B41ADA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:254:31)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeRole5E3DD37F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Role2 in aws-cdk-lib...",
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:270:22)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeInstance2eb15e95/InstanceProfile": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeInstance2eb15e95InstanceProfile839E2065"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Instance2 in aws-cdk-lib...",
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:355:26)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeInstance2eb15e95/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeInstance2eb15e95898D1B72"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Instance2 in aws-cdk-lib...",
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:355:26)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeLogGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeLogGroupCE43B34B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new LogGroup2 in aws-cdk-lib...",
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:385:26)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeRecordinfradocker/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeRecordinfradocker4E29E0AB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:458:21)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:764:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeRoleDefaultPolicyD3C62DE5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...PropertyInjectable.<anonymous> in aws-cdk-lib...",
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:277:14)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeLogGroup/Policy/ResourcePolicy": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ComposeLogGroupPolicyResourcePolicyECE1D733"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...PropertyInjectable.addToResourcePolicy in aws-cdk-lib...",
+        "new ComposeHostStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\compose-host-stack.js:466:18)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:198:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,433 @@
+{
+  "/TmpStagingCleanSlateStagingNetworking": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:acknowledged-rules",
+      "data": {
+        "CloudFormation-Validate::W3010": "Literal AZs in template are the result of accessing stack.availabilityZones, this is expected and safe"
+      },
+      "trace": [
+        "    ...new Vpc2 in aws-cdk-lib...",
+        "    at new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "    at createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "    at C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "    ...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Vpc8378EB38"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcIGWD7BA715C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcVPCGWBF912B6E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:764:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Exports/Output{\"Ref\":\"Vpc8378EB38\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefVpc8378EB38272D6E3A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:764:9)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Exports/Output{\"Ref\":\"VpcstagingpublicSubnet1Subnet0D7796D4\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ExportsOutputRefVpcstagingpublicSubnet1Subnet0D7796D4E5DB236A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:764:9)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Publish/Output{\"Ref\":\"Vpc8378EB38\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PublishOutputRefVpc8378EB385002A76F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:764:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Publish/Output{\"Ref\":\"VpcstagingpublicSubnet1Subnet0D7796D4\"}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PublishOutputRefVpcstagingpublicSubnet1Subnet0D7796D42FA4110A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...App.synth in aws-cdk-lib...",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:764:9)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet1Subnet0D7796D4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet1RouteTableD0ABF646"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet1RouteTableAssociationA85F5D7D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet1DefaultRoute4F2B8EB3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:225 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/EIP": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet1EIPDD487DA5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet1/NATGateway": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet1NATGatewayAAE1CEF1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet2Subnet7DCB36B0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet2RouteTable293F0F34"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet2RouteTableAssociation13D65CA4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:287 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-publicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingpublicSubnet2DefaultRoute2E110883"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:225 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingprivateSubnet1SubnetA2681AF3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingprivateSubnet1RouteTable43A7CAB6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingprivateSubnet1RouteTableAssociationF29EAC40"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingprivateSubnet1DefaultRouteE0F16E21"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)"
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingprivateSubnet2Subnet23738817"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingprivateSubnet2RouteTable7C7437CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingprivateSubnet2RouteTableAssociation2019E728"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\node_modules\\aws-cdk-lib\\aws-ec2\\lib\\vpc.js:1:289 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/TmpStagingCleanSlateStagingNetworking/Vpc/staging-privateSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcstagingprivateSubnet2DefaultRoute57009CD8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new NetworkingStack (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\stacks\\networking-stack.js:65:20)",
+        "createCdkApp (C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\dist\\cdk\\runtime.js:121:11)",
+        "C:\\code\\tmp-staging-clean-slate\\components\\infra-cdk\\generated\\staging\\cdk-app.js:500 (:)"
+      ]
+    }
+  ]
+}
