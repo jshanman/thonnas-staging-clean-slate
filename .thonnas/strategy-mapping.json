@@ -13,6 +13,32 @@
       "resolvedBy": "ai",
       "reasoning": "No host AI provider was available; defaulted deterministically to the first candidate (api-go). Review this choice manually.",
       "decidedAt": "2026-10-05T07:17:42.921Z"
+    },
+    {
+      "strategy": "architecture.contracts.portable",
+      "consumer": "api-go::module:tm-mqtt",
+      "purpose": "architecture.contracts.portable",
+      "resolvedTo": "api-go",
+      "candidates": [
+        "api-go",
+        "lib:arch-thonnas"
+      ],
+      "resolvedBy": "ai",
+      "reasoning": "No host AI provider was available; defaulted deterministically to the first candidate (api-go). Review this choice manually.",
+      "decidedAt": "2026-10-05T07:18:15.959Z"
+    },
+    {
+      "strategy": "observe.metrics.portable",
+      "consumer": "api-go::module:tm-mqtt",
+      "purpose": "observe.metrics.portable",
+      "resolvedTo": "api-go",
+      "candidates": [
+        "api-go",
+        "metrics-otel-signoz"
+      ],
+      "resolvedBy": "ai",
+      "reasoning": "No host AI provider was available; defaulted deterministically to the first candidate (api-go). Review this choice manually.",
+      "decidedAt": "2026-10-05T07:18:15.960Z"
     }
   ]
 }

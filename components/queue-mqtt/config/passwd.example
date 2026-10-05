@@ -1,0 +1,10 @@
+# Mosquitto password file template
+#
+# This file is NOT a valid passwd file. Copy these steps to create passwd:
+#
+#   cp config/passwd.example config/passwd   # optional marker file
+#   mosquitto_passwd -c config/passwd publisher
+#   mosquitto_passwd -b config/passwd subscriber your-secret
+#
+# Never commit config/passwd. Add topic rules in config/acl (from acl.example).
+

@@ -1,0 +1,25 @@
+{
+  "name": "@thonnas/tm-mqtt",
+  "version": "0.1.0",
+  "description": "MQTT client module for pub/sub messaging with a Mosquitto broker.",
+  "optionalDependencies": {
+    "@thonnas/api-go": "latest"
+  },
+  "dependencies": {
+    "@thonnas/queue-mqtt": "latest"
+  },
+  "thonnas": {
+    "package_type": "module",
+    "implements_strategies": [
+      "comms.mqtt"
+    ],
+    "requires_strategies": [
+      "architecture.contracts.portable",
+      "observe.metrics.portable"
+    ],
+    "supported_components": [
+      "api-go"
+    ]
+  }
+}
+

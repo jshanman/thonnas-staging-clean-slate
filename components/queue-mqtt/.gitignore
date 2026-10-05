@@ -1,0 +1,11 @@
+.env.*
+node_modules/*
+dist/*
+
+# Per-environment broker secrets (use *.example templates in repo)
+config/passwd
+config/acl
+config/*.crt
+config/*.key
+config/*.pem
+

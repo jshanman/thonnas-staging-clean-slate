@@ -2,6 +2,7 @@ package app
 
 import (
 	"thonnas/api-go/internal/appmodule"
+	tmmqtt "thonnas/api-go/internal/modules/tm-mqtt"
 )
 
 // GetModuleMetadata returns all module definitions for the application
@@ -21,6 +22,13 @@ func GetModuleMetadata() []*ModuleMetadata {
 			BuildFunc: appmodule.BuildHealthModule,
 			WireFunc:  appmodule.WireHealthModule,
 		},
+
+		// TM MQTT module - no dependencies
+		{
+			Name:      "mqtt",
+			Imports:   []string{},
+			BuildFunc: tmmqtt.BuildMQTTModule,
+			WireFunc:  tmmqtt.WireMQTTModule,
+		},
 	}
 }
-

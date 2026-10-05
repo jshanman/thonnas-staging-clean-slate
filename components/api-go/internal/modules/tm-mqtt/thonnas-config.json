@@ -1,0 +1,33 @@
+{
+  "config": {
+    "default": {
+      "brokerHost": "localhost",
+      "brokerPort": 1883,
+      "topicPrefix": "api-go",
+      "statusTopic": "$share/lwt-group/status/+/+/+",
+      "lwtGroup": "lwt-group",
+      "clientIdPrefix": "api-go",
+      "keepAlive": "60s",
+      "connectTimeout": "30s",
+      "reconnectDelay": "5s",
+      "maxReconnectDelay": "5m",
+      "defaultQoS": 1
+    }
+  },
+  "imports": [
+    {
+      "name": "QUEUE_MQTT_INTERNAL_HOST",
+      "provider": { "key": "queue-mqtt" },
+      "path": "brokerHost",
+      "description": "MQTT broker hostname provided by queue-mqtt."
+    },
+    {
+      "name": "QUEUE_MQTT_INTERNAL_PORT",
+      "provider": { "key": "queue-mqtt" },
+      "path": "brokerPort",
+      "description": "MQTT broker port provided by queue-mqtt."
+    }
+  ],
+  "exports": []
+}
+

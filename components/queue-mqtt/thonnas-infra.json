@@ -1,0 +1,164 @@
+{
+  "thonnasInfraVersion": 1,
+  "environments": {
+    "development": {
+      "endpoints": {
+        "internal": {
+          "primary": {
+            "host": "queue-mqtt",
+            "port": 1883,
+            "protocol": "mqtt"
+          }
+        },
+        "external": {
+          "primary": {
+            "host": "localhost",
+            "port": 9001,
+            "protocol": "ws",
+            "tags": ["websocket"]
+          },
+          "websocket": {
+            "host": "localhost",
+            "port": 9001,
+            "protocol": "ws",
+            "tags": ["websocket"]
+          }
+        }
+      }
+    }
+  },
+  "beta": {
+    "strategies": {
+      "runtime": {
+        "key": "infra.container.compose-host",
+        "ports": [1883, 9001],
+        "extras": { "services": [], "protocols": ["mqtt", "websocket"] }
+      }
+    }
+  },
+  "staging": {
+    "strategies": {
+      "broker": {
+        "key": "infra.compute.fleet.mqtt",
+        "extras": {
+          "bootstrapScript": "bootstrap-emqx.sh",
+          "bootstrapUrl": "",
+          "servicePorts": [1883, 8083],
+          "protocols": ["mqtt", "ws"],
+          "volumePath": "/var/lib/mqtt-data",
+          "capacity": "s",
+          "reliability": "standard"
+        }
+      }
+    },
+    "endpoints": {
+      "internal": {
+        "primary": { "host": "queue-mqtt", "port": 1883, "protocol": "mqtt" },
+        "websocket": { "host": "queue-mqtt", "port": 9001, "protocol": "ws", "tags": ["websocket"] }
+      },
+      "external": {
+        "primary": {
+          "host": "{env}-mqtt.{rootDomain}",
+          "port": 1883,
+          "protocol": "mqtt"
+        },
+        "websocket": {
+          "host": "{env}-mqtt.{rootDomain}",
+          "port": 8084,
+          "protocol": "wss",
+          "tags": ["websocket"]
+        }
+      }
+    }
+  },
+  "production": {
+    "strategies": {
+      "broker": {
+        "key": "infra.compute.fleet.mqtt",
+        "extras": {
+          "bootstrapScript": "bootstrap-emqx.sh",
+          "bootstrapUrl": "",
+          "servicePorts": [1883, 8083],
+          "protocols": ["mqtt", "ws"],
+          "volumePath": "/var/lib/mqtt-data",
+          "capacity": "m",
+          "reliability": "standard",
+          "scaling.min": 3,
+          "scaling.max": 3
+        }
+      }
+    }
+  },
+  "default": {
+    "domain": "{env}.{component}.{rootDomain}",
+    "endpoints": {
+      "internal": {
+        "primary": {
+          "host": "queue-mqtt",
+          "port": 1883,
+          "protocol": "mqtt"
+        },
+        "websocket": {
+          "host": "queue-mqtt",
+          "port": 9001,
+          "protocol": "ws",
+          "tags": ["websocket"]
+        }
+      },
+      "external": {
+        "primary": {
+          "host": "{env}.mqtt.{rootDomain}",
+          "port": 8883,
+          "protocol": "mqtts"
+        },
+        "websocket": {
+          "host": "{env}.mqtt.{rootDomain}",
+          "port": 80,
+          "protocol": "ws",
+          "tags": ["websocket"]
+        }
+      }
+    },
+    "derivations": [
+      {
+        "name": "QUEUE_MQTT_ENDPOINTS",
+        "type": "config",
+        "path": "infra.endpoints.queue-mqtt",
+        "templateType": "json",
+        "sourcePath": "endpoints"
+      },
+      {
+        "name": "QUEUE_MQTT_INTERNAL_HOST",
+        "type": "config",
+        "path": "connection.internal.host",
+        "source": "{{endpoints.internal.default.host}}"
+      },
+      {
+        "name": "QUEUE_MQTT_INTERNAL_PORT",
+        "type": "config",
+        "path": "connection.internal.port",
+        "source": "{{endpoints.internal.default.port}}"
+      },
+      {
+        "name": "QUEUE_MQTT_EXTERNAL_HOST",
+        "type": "config",
+        "path": "connection.external.host",
+        "source": "{{endpoints.external.default.host}}"
+      },
+      {
+        "name": "QUEUE_MQTT_EXTERNAL_PORT",
+        "type": "config",
+        "path": "connection.external.port",
+        "source": "{{endpoints.external.default.port}}"
+      },
+      {
+        "name": "QUEUE_MQTT_EXTERNAL_WS_PORT",
+        "type": "config",
+        "path": "connection.external.wsPort",
+        "source": "{{endpoints.external.websocket.port}}",
+        "description": "External WebSocket port for browser (80 for ws, 443 for wss behind reverse proxy)."
+      }
+    ]
+  }
+}
+

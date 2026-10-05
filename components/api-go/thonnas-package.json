@@ -38,7 +38,9 @@
     "build": {
       "command": "bash scripts/build.sh",
       "runtime": "go"
-    }
+    },
+    "installed_modules": [
+      "@thonnas/tm-mqtt"
+    ]
   }
 }
-

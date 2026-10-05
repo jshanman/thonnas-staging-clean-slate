@@ -1,0 +1,8 @@
+{
+  "description": "Go module dependency slice for tm-mqtt (merged into api-go root go.mod by scripts/aggregate-go-deps.go)",
+  "require": {
+    "github.com/eclipse/paho.mqtt.golang": "v1.5.1",
+    "github.com/patrickmn/go-cache": "v2.1.0+incompatible"
+  }
+}
+

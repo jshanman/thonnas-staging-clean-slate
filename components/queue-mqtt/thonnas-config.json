@@ -1,0 +1,53 @@
+{
+  "config": {
+    "default": {
+      "frontend": {
+        "username": "web-frontend"
+      }
+    }
+  },
+  "imports": [],
+  "exports": [
+    {
+      "name": "QUEUE_MQTT_FRONTEND_USERNAME",
+      "description": "Scoped, browser-safe MQTT username (never the backend's own broker-admin credential). Its password is QUEUE_MQTT_FRONTEND_PASSWORD in thonnas-secrets.json.",
+      "selfImportPath": "frontend.username"
+    },
+    {
+      "name": "QUEUE_MQTT_INTERNAL_HOST",
+      "description": "Internal MQTT broker hostname for in-cluster consumers.",
+      "default": "queue-mqtt",
+      "selfImportPath": "connection.internal.host",
+      "provider": "infra"
+    },
+    {
+      "name": "QUEUE_MQTT_INTERNAL_PORT",
+      "description": "Internal MQTT broker port for in-cluster consumers.",
+      "default": 1883,
+      "selfImportPath": "connection.internal.port",
+      "provider": "infra"
+    },
+    {
+      "name": "QUEUE_MQTT_EXTERNAL_HOST",
+      "description": "External MQTT/WebSocket hostname for browser clients (env-dependent).",
+      "default": "localhost",
+      "selfImportPath": "connection.external.host",
+      "provider": "infra"
+    },
+    {
+      "name": "QUEUE_MQTT_EXTERNAL_PORT",
+      "description": "External MQTT/WebSocket port for native clients.",
+      "default": 9001,
+      "selfImportPath": "connection.external.port",
+      "provider": "infra"
+    },
+    {
+      "name": "QUEUE_MQTT_EXTERNAL_WS_PORT",
+      "description": "External WebSocket port for browser (80 ws, 443 wss behind reverse proxy).",
+      "default": 80,
+      "selfImportPath": "connection.external.wsPort",
+      "provider": "infra"
+    }
+  ]
+}
+

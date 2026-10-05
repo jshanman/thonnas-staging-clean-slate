@@ -1,0 +1,15 @@
+# Mosquitto ACL template — copy to acl and customize per deployment.
+# Do not commit the real acl file (see config/README.md).
+#
+# Example: role-based topic access for an application namespace.
+# Replace "myapp" with your project or module topic prefix.
+
+user publisher
+topic write myapp/#
+
+user subscriber
+topic read myapp/#
+
+user admin
+topic readwrite #
+

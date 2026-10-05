@@ -1,0 +1,32 @@
+services:
+  queue-mqtt:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    ports:
+      - "${QUEUE_MQTT_HOST_PORT:-1883}:1883"  # MQTT
+      - "${QUEUE_MQTT_WS_HOST_PORT:-9001}:9001"  # WebSocket
+    volumes:
+      - ./config:/mosquitto/config
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    networks:
+      - thonnas-network
+    labels:
+      - "com.thonnas.component=queue-mqtt"
+      - "com.thonnas.component-type=queue"
+      - "com.thonnas.classification=open-source"
+      - "com.thonnas.version=0.1.0"
+    healthcheck:
+      test: ["CMD", "mosquitto_sub", "-t", "$$SYS/#", "-C", "1", "-i", "healthcheck", "-W", "3"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  mosquitto_data:
+    driver: local
+  mosquitto_log:
+    driver: local
+
+
