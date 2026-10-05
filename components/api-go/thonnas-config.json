@@ -61,24 +61,6 @@
       "provider": { "keyPattern": "metrics-otel.*" },
       "path": "otelEndpoint",
       "description": "OTLP gRPC collector endpoint for emitting traces/metrics."
-    },
-    {
-      "name": "WORKER_MANAGER_TEMPORAL_ENDPOINT",
-      "provider": { "keyPattern": "worker-manager-temporal.*" },
-      "path": "runtime.endpoint",
-      "description": "Internal Temporal service endpoint (host:port) for scheduling the UserCountJob cron."
-    },
-    {
-      "name": "WORKER_MANAGER_TEMPORAL_NAMESPACE",
-      "provider": { "keyPattern": "worker-manager-temporal.*" },
-      "path": "runtime.namespace",
-      "description": "Temporal namespace to connect to."
-    },
-    {
-      "name": "WORKER_MANAGER_TEMPORAL_TASK_QUEUE",
-      "provider": { "keyPattern": "worker-manager-temporal.*" },
-      "path": "runtime.taskQueue",
-      "description": "Temporal task queue api-go's worker polls."
     }
   ],
   "exports": [
