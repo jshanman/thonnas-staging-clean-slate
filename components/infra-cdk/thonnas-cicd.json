@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1",
+  "kind": "package",
+  "contributes": {
+    "deploy": {
+      "identity.assume": {
+        "run": "npm ci && thonnas infra identity assume --env \"$THONNAS_ENV\"",
+        "scope": "project"
+      },
+      "config.resolve": {
+        "run": "npm ci --prefix components/infra-docker && thonnas config resolve --env \"$THONNAS_ENV\"",
+        "scope": "project",
+        "workingDirectory": "."
+      },
+      "infra.plan": {
+        "run": "thonnas infra plan --env \"$THONNAS_ENV\"",
+        "scope": "project"
+      },
+      "infra.apply": {
+        "run": "thonnas infra apply --env \"$THONNAS_ENV\"",
+        "scope": "project"
+      },
+      "release": {
+        "run": "npm ci && thonnas release --env \"$THONNAS_ENV\"",
+        "scope": "project"
+      }
+    }
+  }
+}
+
+
+

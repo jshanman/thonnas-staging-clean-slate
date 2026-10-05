@@ -1,0 +1,74 @@
+{
+  "name": "@thonnas/infra-cdk",
+  "version": "0.3.0-beta.41",
+  "description": "Single-AZ AWS CDK implementation for Thonnas infra strategies.",
+  "dependencies": {
+    "@thonnas/infra-docker": "latest",
+    "@thonnas/infra-localstack": "latest"
+  },
+  "thonnas": {
+    "package_type": "component",
+    "key": "infra-cdk",
+    "component_type": "infra",
+    "env_scope": [
+      "beta",
+      "staging",
+      "production"
+    ],
+    "classification": "core-thonnas",
+    "implements_strategies": [
+      "infra.cdk",
+      "infra.container.simple-vm",
+      "infra.container.compose-host",
+      "infra.container.managed-host",
+      "infra.website.static",
+      "infra.artifact.deploy",
+      "infra.artifact.website-bucket",
+      "infra.storage",
+      "infra.api.storage-temp-url",
+      "infra.db.relational",
+      "infra.compute.fleet.dba",
+      "infra.db.document",
+      "infra.cache.keyvalue",
+      "infra.worker.temporal",
+      "infra.observe.metrics",
+      "infra.observe.dashboard",
+      "comms.events.pub-sub.sns"
+    ],
+    "secrets_provider": {
+      "id": "aws-secrets-manager",
+      "module": "src/config/awsSecretsManager.provider.js",
+      "export": "createSecretsProvider",
+      "priority": 100
+    },
+    "infra_provider": {
+      "key": "infra-cdk",
+      "plan": "npm run infra:plan --",
+      "apply": "npm run infra:apply --",
+      "destroy": "npm run infra:destroy --",
+      "identityAssume": "npm run infra:identity-assume --",
+      "release": "npm run infra:release --",
+      "rollback": "npm run infra:rollback --",
+      "history": "npm run infra:history --"
+    },
+    "infra_derivation": {
+      "command": "npm run generate:endpoints",
+      "description": "Generate config exports from thonnas-infra.json derivations"
+    },
+    "doctor": {
+      "engines": {
+        "nodejs": {
+          "version": ">=18.0.0",
+          "versionCmd": "node --version",
+          "fix": "Install Node.js: https://nodejs.org/ or use nvm: nvm install 20"
+        },
+        "npm": {
+          "version": ">=9.0.0",
+          "versionCmd": "npm --version",
+          "fix": "npm comes with Node.js. Install Node.js: https://nodejs.org/"
+        }
+      }
+    }
+  }
+}
+

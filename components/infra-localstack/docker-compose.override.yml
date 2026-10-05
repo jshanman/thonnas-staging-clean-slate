@@ -1,0 +1,38 @@
+# Development-only: one LocalStack. Auto-detected by infra-docker e2e-build
+# and included in generated override. SERVICES is the union of installed package extras
+# (INFRA_LOCALSTACK_SERVICES written under infra-docker/generated/).
+services:
+  infra-localstack:
+    image: localstack/localstack:4.14.0
+    restart: unless-stopped
+    ports:
+      - "${INFRA_LOCALSTACK_PORT:-4566}:4566"
+    environment:
+      DEFAULT_REGION: "${INFRA_LOCALSTACK_REGION:-us-east-1}"
+      SERVICES: "${INFRA_LOCALSTACK_SERVICES:-}"
+      PERSISTENCE: "1"
+      DEBUG: "1"
+    volumes:
+      - infra-localstack-data:/var/lib/localstack
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:4566/_localstack/health')\"",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    networks:
+      thonnas-network:
+        aliases:
+          - infra-cdk-localstack
+
+volumes:
+  infra-localstack-data:
+
+networks:
+  thonnas-network:
+    external: true
+

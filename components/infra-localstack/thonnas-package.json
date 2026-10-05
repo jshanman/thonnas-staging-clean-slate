@@ -1,0 +1,32 @@
+{
+  "name": "@thonnas/infra-localstack",
+  "version": "0.1.6",
+  "description": "One LocalStack AWS API emulator for local/dev. Packages contribute SERVICES; this component owns the container.",
+  "dependencies": {
+    "@thonnas/infra-docker": "latest"
+  },
+  "thonnas": {
+    "package_type": "component",
+    "key": "infra-localstack",
+    "component_type": "infra",
+    "env_scope": [
+      "development",
+      "local"
+    ],
+    "classification": "core-thonnas",
+    "framework": "localstack",
+    "language": "yaml",
+    "implements_strategies": [
+      "infra.container.compose-host",
+      "infra.aws.localstack"
+    ],
+    "compatible_modules": [],
+    "secrets_provider": {
+      "id": "localstack-secrets-manager",
+      "module": "src/config/localstackSecrets.provider.js",
+      "export": "createSecretsProvider",
+      "priority": 250
+    }
+  }
+}
+

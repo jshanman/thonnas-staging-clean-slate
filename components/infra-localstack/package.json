@@ -1,0 +1,10 @@
+{
+  "name": "@thonnas/infra-localstack",
+  "version": "0.1.4",
+  "private": true,
+  "description": "One LocalStack container for local/dev AWS APIs.",
+  "scripts": {
+    "test": "node --test src/config/localstackSecrets.provider.test.js"
+  }
+}
+

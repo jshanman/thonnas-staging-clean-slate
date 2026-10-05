@@ -1,0 +1,23 @@
+FROM public.ecr.aws/docker/library/node:20-bullseye
+
+ENV AWS_CLI_VERSION=2.17.60 \
+    PATH="/root/.local/bin:${PATH}"
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends unzip groff less \
+  && rm -rf /var/lib/apt/lists/*
+
+# Install AWS CLI v2
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+  && unzip awscliv2.zip \
+  && ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli \
+  && rm -rf awscliv2.zip aws
+
+# Install CDK globally for convenience (project also bundles local deps)
+RUN npm install -g aws-cdk@2
+
+WORKDIR /workspace
+
+# Default command drops user into bash inside mounted repo
+CMD ["/bin/bash"]
+

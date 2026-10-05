@@ -1,0 +1,33 @@
+{
+  "imports": [],
+  "exports": [
+    {
+      "name": "INFRA_LOCALSTACK_ENDPOINT",
+      "description": "LocalStack gateway URL for in-cluster AWS SDK clients.",
+      "default": "http://infra-localstack:4566",
+      "selfImportPath": "connection.internal.endpoint",
+      "provider": "infra"
+    },
+    {
+      "name": "INFRA_LOCALSTACK_PORT",
+      "description": "Host port mapped to LocalStack 4566.",
+      "default": 4566,
+      "selfImportPath": "connection.external.port",
+      "provider": "infra"
+    },
+    {
+      "name": "INFRA_LOCALSTACK_REGION",
+      "description": "Default AWS region for the LocalStack emulator.",
+      "default": "us-east-1",
+      "selfImportPath": "connection.region",
+      "provider": "infra"
+    },
+    {
+      "name": "INFRA_LOCALSTACK_SERVICES",
+      "description": "Comma-separated AWS APIs enabled in the one LocalStack container. Written by infra-docker e2e-build from package extras.",
+      "default": "",
+      "provider": "infra"
+    }
+  ]
+}
+

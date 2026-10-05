@@ -1,0 +1,114 @@
+{
+  "thonnasInfraVersion": 1,
+  "staging": {
+    "endpoints": {
+      "internal": {
+        "primary": {
+          "host": "",
+          "port": 4566,
+          "protocol": "http",
+          "tags": ["managed-localstack"]
+        }
+      }
+    },
+    "derivations": [
+      {
+        "name": "INFRA_LOCALSTACK_ENDPOINT",
+        "type": "config",
+        "path": "connection.internal.endpoint",
+        "source": "",
+        "description": "LocalStack is development-only. Deployed AWS uses infra-cdk Secrets Manager and the account SNS/SQS endpoints."
+      }
+    ]
+  },
+  "production": {
+    "endpoints": {
+      "internal": {
+        "primary": {
+          "host": "",
+          "port": 4566,
+          "protocol": "http",
+          "tags": ["managed-localstack"]
+        }
+      }
+    },
+    "derivations": [
+      {
+        "name": "INFRA_LOCALSTACK_ENDPOINT",
+        "type": "config",
+        "path": "connection.internal.endpoint",
+        "source": "",
+        "description": "LocalStack is development-only. Deployed AWS uses infra-cdk Secrets Manager and the account SNS/SQS endpoints."
+      }
+    ]
+  },
+  "environments": {
+    "development": {
+      "endpoints": {
+        "internal": {
+          "primary": {
+            "host": "infra-localstack",
+            "port": 4566,
+            "protocol": "http"
+          }
+        },
+        "external": {
+          "primary": {
+            "host": "localhost",
+            "port": 4566,
+            "protocol": "http"
+          }
+        }
+      }
+    }
+  },
+  "beta": {
+    "strategies": {
+      "runtime": {
+        "key": "infra.container.compose-host",
+        "ports": [4566]
+      }
+    }
+  },
+  "default": {
+    "strategies": {
+      "localstack": {
+        "key": "infra.aws.localstack",
+        "extras": {
+          "infra.aws.localstack.services": ["secretsmanager"]
+        }
+      }
+    },
+    "endpoints": {
+      "internal": {
+        "primary": {
+          "host": "infra-localstack",
+          "port": 4566,
+          "protocol": "http"
+        }
+      },
+      "external": {
+        "primary": {
+          "host": "localhost",
+          "port": 4566,
+          "protocol": "http"
+        }
+      }
+    },
+    "derivations": [
+      {
+        "name": "INFRA_LOCALSTACK_ENDPOINT",
+        "type": "config",
+        "path": "connection.internal.endpoint",
+        "source": "http://{{endpoints.internal.default.host}}:{{endpoints.internal.default.port}}"
+      },
+      {
+        "name": "INFRA_LOCALSTACK_PORT",
+        "type": "config",
+        "path": "connection.external.port",
+        "source": "{{endpoints.external.default.port}}"
+      }
+    ]
+  }
+}
+

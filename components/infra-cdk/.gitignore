@@ -1,0 +1,6 @@
+dist/
+node_modules/
+generated/
+.env.*
+# CDK context cache (lookups + our ThonnasBucketExists); recreated on plan/apply
+cdk.context.json

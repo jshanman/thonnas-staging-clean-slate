@@ -1,0 +1,22 @@
+{
+  "thonnasInfraVersion": 1,
+  "default": {
+    "strategies": {
+      "infra.bootstrap": {
+        "key": "infra.bootstrap",
+        "extras": {
+          "priority": 0,
+          "command": "bash scripts/bootstrap.sh",
+          "applyStrategies": []
+        }
+      },
+      "localstack": {
+        "key": "infra.aws.localstack",
+        "extras": {
+          "infra.aws.localstack.services": ["s3", "secretsmanager"]
+        }
+      }
+    }
+  }
+}
+

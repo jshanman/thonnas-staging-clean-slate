@@ -1,0 +1,112 @@
+{
+    "name": "infra-cdk",
+    "description": "AWS CDK infra provider. Compose-host env vars are read at deploy time and baked into EC2 user-data.",
+    "imports": [
+        {
+            "name": "THONNAS_PROJECT_NAME",
+            "provider": {
+                "key": "config-thonnas"
+            },
+            "description": "Project name from root thonnas-package.json; used in CloudFormation stack prefix for per-project scope."
+        },
+        {
+            "name": "THONNAS_INSTALL_URL",
+            "provider": { "key": "config-thonnas" },
+            "description": "Install URL for Thonnas CLI (curl | sh); injected into EC2 user-data so compose host can install CLI. Future URLs may include version for reproducible builds."
+        }
+    ],
+    "exports": [
+        {
+            "name": "INFRA_CDK_LOCALSTACK_PORT",
+            "description": "Deprecated host-port alias. LocalStack is owned by @thonnas/infra-localstack (INFRA_LOCALSTACK_PORT). Kept so existing project/config.json keys keep working.",
+            "default": 4566
+        },
+        {
+            "name": "THONNAS_AWS_CLI",
+            "description": "AWS CLI command name. Use 'awslocal' in development (with LocalStack) so commands target LocalStack; use 'aws' in non-development for real AWS.",
+            "default": "aws"
+        },
+        {
+            "name": "INFRA_CDK_S3_ENDPOINT",
+            "description": "S3 endpoint URL for containers. In development set to the single @thonnas/infra-localstack service (http://infra-localstack:4566). In other environments set to live AWS, e.g. https://s3.${AWS_REGION}.amazonaws.com (not from AWS CLI; derive from AWS_REGION). Omit or leave unset for SDK default.",
+            "defaultByEnv": {
+                "development": "http://infra-localstack:4566",
+                "beta": "",
+                "default": ""   
+            }         
+        },
+        {
+            "name": "AWS_REGION",
+            "description": "AWS region for LocalStack and S3 (bucket region).",
+            "default": "us-east-1"
+        },
+        {
+            "name": "INFRA_CDK_DEPLOY_ROLE_ARN",
+            "description": "IAM role ARN assumed by CI via GitHub OIDC. Non-secret. Required before config.resolve on GitHub-hosted runners. Leave empty in development (local SSO/instance role no-ops identity.assume). After the first laptop apply of the GithubOidc stack, copy the DeployRoleArn output here for beta+.",
+            "defaultByEnv": {
+                "development": "",
+                "beta": "",
+                "default": ""
+            }
+        },
+        {
+            "name": "INFRA_CDK_OIDC_AUDIENCE",
+            "description": "Audience for the GitHub OIDC JWT (sts.amazonaws.com). Non-secret. Used by identity.assume and the IAM trust policy.",
+            "default": "sts.amazonaws.com"
+        },
+        {
+            "name": "INFRA_CDK_GITHUB_ORG",
+            "sourceType": "user-provided",
+            "description": "GitHub org or user that may assume the deploy role. Non-secret. Prompted by thonnas config setup; stored in the consuming project's project/config.json. Required to synthesize the OIDC trust stack (skipped when empty)."
+        },
+        {
+            "name": "INFRA_CDK_GITHUB_REPO",
+            "sourceType": "user-provided",
+            "description": "GitHub repository name (not owner) trusted by the deploy role. Non-secret. Prompted by thonnas config setup; stored in the consuming project's project/config.json."
+        },
+        {
+            "name": "INFRA_CDK_OIDC_SUBJECT",
+            "description": "Optional comma-separated GitHub sub claim patterns (StringLike). When empty, defaults to repo:ORG/REPO:environment:ENV and repo:ORG/REPO:ref:refs/heads/ENV.",
+            "default": ""
+        },
+        {
+            "name": "INFRA_CDK_OIDC_PROVIDER_ARN",
+            "description": "Optional existing IAM OIDC provider ARN for token.actions.githubusercontent.com. Apply auto-imports the account GitHub IdP when this is empty. The IdP is account-wide and is retained on stack destroy.",
+            "default": ""
+        }
+    ],
+    "internal": [
+        {
+            "name": "THONNAS_COMPOSE_GIT_REPO_URL",
+            "sourceType": "user-provided",
+            "selfImportPath": "compose.gitRepositoryUrl",
+            "description": "Git repository URL for compose-host EC2. Prompted by thonnas config setup; injected into user-data at deploy time."
+        },
+        {
+            "name": "THONNAS_COMPOSE_GIT_USERNAME",
+            "sourceType": "user-provided",
+            "selfImportPath": "compose.gitUsername",
+            "description": "Git clone username for private repos. Prompted by thonnas config setup; injected into user-data at deploy time."
+        },
+        {
+            "name": "THONNAS_COMPOSE_GIT_BRANCH",
+            "sourceType": "user-provided",
+            "description": "Git branch for compose-host (defaults to feature branch or main). Injected into user-data at deploy time.",
+            "default": "main"
+        },
+        {
+            "name": "THONNAS_COMPOSE_GIT_PASSWORD_SECRET_NAME",
+            "sourceType": "user-provided",
+            "default": "THONNAS_GIT_PWD",
+            "description": "AWS Secrets Manager secret name for git clone password. Injected into user-data at deploy time."
+        },
+        {
+            "name": "THONNAS_ROOT_DOMAIN",
+            "path": "rootDomain",
+            "sourceType": "user-provided",
+            "description": "Root domain for hostnames. Prompted by thonnas config setup; used for compose-host and other infra hostnames."
+        }
+    ]
+}
+
+

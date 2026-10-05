@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "awslabs.aws-api-mcp-server": {
+      "command": "bash",
+      "args": ["components/infra-cdk/scripts/run-aws-mcp.sh"],
+      "env": {},
+      "description": "AWS CLI via MCP — EC2, SSM Run Command, CloudWatch Logs for compose-host troubleshooting (no SSH). Requires Docker and bash."
+    }
+  }
+}
+

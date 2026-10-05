@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1",
+  "kind": "package",
+  "contributes": {
+    "test": {
+      "unit": {
+        "run": "node --test src/config/localstackSecrets.provider.test.js"
+      }
+    }
+  }
+}
+
