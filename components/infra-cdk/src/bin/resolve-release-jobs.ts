@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { collectDeploymentIntents } from '../planner/collector/deployment-intents';
+import { filterIntentsForEnv } from '../planner/plan';
 
 export const parseStrategyFilter = (raw?: string): string[] | undefined => {
   if (!raw?.trim()) return undefined;
@@ -38,10 +39,18 @@ export async function resolveReleaseJobs(
   // buildIntentFromInfraFile call sites). Route lib-sourced intents through --lib, matching
   // findPackageDir's own split, instead of assuming every intent lives under components/.
   const libsPrefix = path.join('.thonnas', 'libs') + path.sep;
-  return intents.map((intent) =>
-    intent.componentPath.startsWith(libsPrefix)
-      ? { lib: intent.component }
-      : { targetComponent: intent.component },
-  );
+  const appIntents = intents.filter((intent) => !intent.componentPath.startsWith(libsPrefix));
+  // @intent Apply the same monorepoDeploy collapse infra plan/apply use -- when one component's
+  // strategy declares monorepoDeploy (the compose-host instance renders every service itself),
+  // every other app component's own strategy (fleet, ecs-fargate, ...) never actually got
+  // provisioned as separate infra, so releasing them individually would target nonexistent stacks.
+  const collapsedAppComponents = new Set(filterIntentsForEnv(appIntents, env).map((intent) => intent.component));
+  return intents
+    .filter((intent) => intent.componentPath.startsWith(libsPrefix) || collapsedAppComponents.has(intent.component))
+    .map((intent) =>
+      intent.componentPath.startsWith(libsPrefix)
+        ? { lib: intent.component }
+        : { targetComponent: intent.component },
+    );
 }
 

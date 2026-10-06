@@ -129,10 +129,10 @@
       ]
     }
   ],
-  "/TmpStagingCleanSlateStagingComposeHost/ComposeInstance2eb15e95/InstanceProfile": [
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeInstancef063c8c4/InstanceProfile": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "ComposeInstance2eb15e95InstanceProfile839E2065"
+      "data": "ComposeInstancef063c8c4InstanceProfile867D9E5C"
     },
     {
       "type": "aws:cdk:creationStack",
@@ -145,10 +145,10 @@
       ]
     }
   ],
-  "/TmpStagingCleanSlateStagingComposeHost/ComposeInstance2eb15e95/Resource": [
+  "/TmpStagingCleanSlateStagingComposeHost/ComposeInstancef063c8c4/Resource": [
     {
       "type": "aws:cdk:logicalId",
-      "data": "ComposeInstance2eb15e95898D1B72"
+      "data": "ComposeInstancef063c8c4806C32AF"
     },
     {
       "type": "aws:cdk:creationStack",

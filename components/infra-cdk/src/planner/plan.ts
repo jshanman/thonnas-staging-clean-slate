@@ -53,7 +53,10 @@ export interface PlanOptions extends CollectorOptions {
   resolveReleasedContainers?: (components: string[]) => Promise<Record<string, ReleasedContainer>>;
 }
 
-const filterIntentsForEnv = (intents: DeploymentIntent[], env: string): DeploymentIntent[] => {
+// @intent Exported so release job resolution can apply the identical monorepoDeploy collapse --
+// otherwise release tries to release every individually-strategized component (fleet, ecs-fargate)
+// even though apply folded them all into the one compose-host instance's docker-compose services.
+export const filterIntentsForEnv = (intents: DeploymentIntent[], env: string): DeploymentIntent[] => {
   const match = intents.find((intent) => {
     const envStrategies = intent.environments[env] ?? intent.strategies;
     return Object.values(envStrategies).some((strategy) => strategy?.extras?.monorepoDeploy === true);
