@@ -3,7 +3,7 @@ import { DependencyGraph, PlannedResource, ResolvedCloudComponent, StrategyResol
 import { ecrRepositoryName, resolveComponentInternalEnv } from '../utils/path-helpers';
 import { buildEnvProfile } from './env-profiles';
 import { NetworkingStack } from '../stacks/networking-stack';
-import { EcsSharedStack } from '../stacks/ecs-shared-stack';
+import { EcsSharedStack, requiresAlbHttps } from '../stacks/ecs-shared-stack';
 import { EcsServiceStack } from '../stacks/ecs-service-stack';
 import { Ec2ServiceStack } from '../stacks/ec2-service-stack';
 import { ComposeHostStack } from '../stacks/compose-host-stack';
@@ -177,8 +177,19 @@ export const createCdkApp = (options: CreateCdkAppOptions): App => {
   const albCertificateArn =
     process.env.THONNAS_ALB_CERTIFICATE_ARN ||
     options.resolution.components.find((c) => c.metadata.certificateArn)?.metadata.certificateArn;
-  // @intent Skip ALB when plan omitted HTTP (missing/pending cert) so Wiring does not throw
-  const enableAlb = Boolean(albCertificateArn?.trim());
+  // @intent Enable the ALB whenever this env needs HTTPS Fargate (staging/prod) and we have
+  // either a known cert ARN or a root domain to self-request+DNS-validate a new one from --
+  // matching EcsSharedStack's own supported bootstrap path (Certificate + CertificateValidation
+  // .fromDns). Previously this only enabled the ALB when a certArn already existed, which meant
+  // a brand-new domain/project could never get its first cert requested at all: the one
+  // construct that requests it (inside EcsSharedStack, gated on enableAlb) never got created,
+  // so `infra plan` stayed permanently "blocked: certStatus=missing" with no way forward short
+  // of supplying a certArn from somewhere else first. Only remaining throw case inside
+  // EcsSharedStack (requiresAlbHttps && !certArn && !rootDomain) is now unreachable here since
+  // this condition already requires one of the two.
+  const enableAlb =
+    Boolean(albCertificateArn?.trim()) ||
+    (requiresAlbHttps(profile) && Boolean(options.rootDomain?.trim()));
   const shared = networking
     ? new EcsSharedStack(app, wiringStackName, {
         ...stackProps,
@@ -1020,7 +1031,6 @@ export async function resolveGithubNumericIdsForSynth(
     return {};
   }
 }
-
 
 
 

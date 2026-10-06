@@ -40,7 +40,7 @@ const albNameFromStack = (stackName: string): string => {
   return prefix ? `${prefix}-alb` : 'alb';
 };
 
-const requiresAlbHttps = (profile: EnvProfile): boolean =>
+export const requiresAlbHttps = (profile: EnvProfile): boolean =>
   profile.allowFargate && (profile.category === 'staging' || profile.category === 'prod');
 
 // @intent Provide shared ECS cluster + optional ACM HTTPS ALB for service stacks
@@ -162,6 +162,5 @@ export class EcsSharedStack extends Stack implements EcsSharedOutputs {
     }
   }
 }
-
 
 
