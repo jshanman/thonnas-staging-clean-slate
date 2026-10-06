@@ -730,7 +730,14 @@ function sanitizeOptions(options: SharedInfraOptions): SharedInfraOptions {
     gitTag: options.gitTag,
     deploySlug: options.deploySlug,
     accountId: options.accountId,
-    region: options.region,
+    // @intent --region has no CLI-level default, unlike every other AWS-touching path in this
+    // file (openReceiptStore, resolveRegionFromConfig, etc.), which all fall back to
+    // AWS_REGION/AWS_DEFAULT_REGION. Without this, resolvePlanExistingState's `if (region &&
+    // rootDomain)` guard silently skipped the real ACM wildcard-cert lookup whenever a caller
+    // (every invocation that only exports AWS_REGION, never passes --region explicitly) relied
+    // on the env var -- plan/apply stayed permanently "blocked: certStatus=missing" even after
+    // the cert was requested and ISSUED, since the lookup that would have found it never ran.
+    region: options.region ?? process.env.AWS_REGION ?? process.env.AWS_DEFAULT_REGION,
     dryRun: Boolean(options.dryRun),
     strategies: options.strategies,
     targetComponent: options.targetComponent,
@@ -1840,6 +1847,5 @@ function logSuccess(message: string): void {
 function logError(message: string): void {
   console.error(`❌ ${message}`);
 }
-
 
 
