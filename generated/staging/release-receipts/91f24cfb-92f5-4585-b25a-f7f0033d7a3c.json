@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "91f24cfb-92f5-4585-b25a-f7f0033d7a3c",
+  "env": "staging",
+  "createdAt": "2026-10-06T00:37:51.578Z",
+  "status": "deployed",
+  "packages": [
+    {
+      "key": "cicd-github-actions",
+      "binding": "",
+      "from": null,
+      "to": "noop",
+      "kind": "noop"
+    },
+    {
+      "key": "infra-docker",
+      "binding": "",
+      "from": null,
+      "to": "noop",
+      "kind": "noop"
+    }
+  ]
+}

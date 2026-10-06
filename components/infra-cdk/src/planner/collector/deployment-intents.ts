@@ -118,11 +118,46 @@ const buildIntentFromInfraFile = async (
       const genJson = await readJsonIfExists<{ publishedServices?: unknown }>(genPath);
       if (genJson?.publishedServices && Array.isArray(genJson.publishedServices) && spec) {
         const merged = JSON.parse(JSON.stringify(spec)) as Record<string, unknown>;
-        const def = (merged.default ??= {}) as Record<string, unknown>;
-        const strategies = (def.strategies ??= {}) as Record<string, unknown>;
-        const composeHost = (strategies.composeHost ??= {}) as Record<string, unknown>;
-        const extras = (composeHost.extras ??= {}) as Record<string, unknown>;
-        extras.publishedServices = genJson.publishedServices;
+        // @intent Inject publishedServices into every block (default, or any env sibling/nested
+        // under "environments") that actually declares a compose-host strategy, instead of
+        // assuming it always lives under "default" -- a component scoped to only "beta" (compose-
+        // host for local dev + beta; staging/production use real per-component infra instead,
+        // with no composeHost entry at all under default) would otherwise get an empty
+        // default.strategies.composeHost stub synthesized here with no .key, failing schema
+        // validation for every env, not just the one that actually wants compose-host.
+        const blocksToScan: Array<Record<string, unknown>> = [];
+        for (const [blockKey, blockValue] of Object.entries(merged)) {
+          if (blockKey === 'thonnasInfraVersion' || !blockValue || typeof blockValue !== 'object') continue;
+          if (blockKey === 'environments') {
+            for (const envBlock of Object.values(blockValue as Record<string, unknown>)) {
+              if (envBlock && typeof envBlock === 'object') blocksToScan.push(envBlock as Record<string, unknown>);
+            }
+          } else {
+            blocksToScan.push(blockValue as Record<string, unknown>);
+          }
+        }
+        let injected = false;
+        for (const block of blocksToScan) {
+          const strategies = block.strategies as Record<string, unknown> | undefined;
+          if (!strategies) continue;
+          for (const requirement of Object.values(strategies)) {
+            if (!requirement || typeof requirement !== 'object') continue;
+            const req = requirement as Record<string, unknown>;
+            if (req.key !== 'infra.container.compose-host') continue;
+            const extras = (req.extras ??= {}) as Record<string, unknown>;
+            extras.publishedServices = genJson.publishedServices;
+            injected = true;
+          }
+        }
+        // @intent Preserve prior behavior for the common case: a component with no explicit
+        // composeHost key anywhere yet (fresh scaffold) still gets a default stub to fill in.
+        if (!injected) {
+          const def = (merged.default ??= {}) as Record<string, unknown>;
+          const strategies = (def.strategies ??= {}) as Record<string, unknown>;
+          const composeHost = (strategies.composeHost ??= {}) as Record<string, unknown>;
+          const extras = (composeHost.extras ??= {}) as Record<string, unknown>;
+          extras.publishedServices = genJson.publishedServices;
+        }
         spec = merged;
       }
       const parsed = deploymentSpecSchema.safeParse(spec);

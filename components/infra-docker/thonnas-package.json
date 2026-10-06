@@ -1,6 +1,6 @@
 {
   "name": "@thonnas/infra-docker",
-  "version": "0.2.0-beta.13",
+  "version": "0.2.0-beta.16",
   "description": "Docker Compose infra-as-code bundle for managing multi-service environments.",
   "keywords": [
     "thonnas",

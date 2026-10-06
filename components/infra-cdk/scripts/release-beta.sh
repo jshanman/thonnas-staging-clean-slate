@@ -18,6 +18,29 @@ set -euo pipefail
 # aws CLI/SSM output contains unless Python is forced into UTF-8 mode; harmless no-op elsewhere.
 export PYTHONUTF8=1
 
+# @intent Despite the "-beta" filename (kept as-is: it's referenced by exact path from multiple
+# repos' thonnas-cicd.json release.compose-host steps, and renaming it would mean updating every
+# one of them), this script works for any env -- the name predates compose-host deploys existing
+# for staging/production. Precedence: --env flag > THONNAS_RELEASE_ENV > beta (unchanged default,
+# so every existing CI caller keeps working without modification).
+THONNAS_ENV="${THONNAS_RELEASE_ENV:-beta}"
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --env)
+      THONNAS_ENV="$2"
+      shift 2
+      ;;
+    --env=*)
+      THONNAS_ENV="${1#--env=}"
+      shift
+      ;;
+    *)
+      echo "[release-beta] unknown argument: $1" >&2
+      exit 2
+      ;;
+  esac
+done
+
 AWS_REGION="${AWS_REGION:-${THONNAS_BETA_REGION:-us-east-1}}"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -34,7 +57,6 @@ if [ -f "${_REPO_ROOT}/project/config.json" ]; then
 fi
 BRANCH="${THONNAS_BETA_BRANCH:-${THONNAS_COMPOSE_GIT_BRANCH:-${_CONFIG_JSON_BRANCH:-main}}}"
 REPO_DIR="${THONNAS_BETA_REPO_DIR:-/opt/thonnas-app}"
-THONNAS_ENV="beta"
 COMPOSE_COMPONENT="${THONNAS_BETA_COMPOSE_COMPONENT:-infra-docker}"
 export AWS_REGION
 
@@ -178,4 +200,3 @@ if [ "$STATUS" != "Success" ]; then
   echo "[release-beta] FAILED"
   exit 1
 fi
-
